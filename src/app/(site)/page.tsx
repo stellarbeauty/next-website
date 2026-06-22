@@ -9,7 +9,6 @@ import {
   Flower2,
   Leaf,
   Star,
-  Quote,
   Hand,
 } from "lucide-react";
 import {
@@ -92,16 +91,13 @@ const Stars = ({ n = 5 }: { n?: number }) => (
   </div>
 );
 
-const Avatar = ({ name, tone = "forest" }: { name: string; tone?: "forest" | "khaki" }) => {
+const Avatar = ({ name }: { name: string }) => {
   const initials = name
     .split(" ")
     .map((p) => p[0])
     .slice(0, 2)
     .join("");
-  const cls =
-    tone === "forest"
-      ? "bg-[color:var(--forest)] text-[color:var(--khaki-soft)]"
-      : "bg-[color:var(--khaki)] text-[color:var(--forest)]";
+  const cls = "bg-[color:var(--forest)] text-[color:var(--khaki-soft)]";
   return (
     <span
       className={`grid h-10 w-10 shrink-0 place-items-center rounded-full text-xs font-medium tracking-[0.04em] ${cls}`}
@@ -111,9 +107,9 @@ const Avatar = ({ name, tone = "forest" }: { name: string; tone?: "forest" | "kh
   );
 };
 
-const Byline = ({ t, tone = "forest" }: { t: Testimonial; tone?: "forest" | "khaki" }) => (
+const Byline = ({ t }: { t: Testimonial }) => (
   <div className="flex items-center gap-3">
-    <Avatar name={t.name} tone={tone} />
+    <Avatar name={t.name} />
     <div className="min-w-0">
       <p className="truncate text-sm font-medium text-[color:var(--forest)]">{t.name}</p>
       <p className="truncate text-[11px] text-[color:var(--muted-foreground)]">
@@ -124,48 +120,35 @@ const Byline = ({ t, tone = "forest" }: { t: Testimonial; tone?: "forest" | "kha
 );
 
 const FeaturedCard = ({ t }: { t: Testimonial }) => (
-  <figure className="group relative lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-2xl border border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)] p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-[color:var(--forest)]/30 md:p-12">
-    <Quote
-      className="pointer-events-none absolute right-6 top-6 h-14 w-14 text-[color:var(--forest)]/8 md:right-10 md:top-10 md:h-20 md:w-20"
-      strokeWidth={1}
-    />
+  <figure className="group relative lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-2xl border border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)] p-8 transition-flow hover:border-[color:var(--forest)]/20 md:p-12">
     <div>
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col items-start gap-2">
         <Stars n={t.rating} />
-        <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-          Featured · {t.service}
-        </span>
+        <span className="label-quiet">{t.service}</span>
       </div>
-      <blockquote className="mt-8 font-display text-xl font-medium leading-[1.25] tracking-[-0.015em] text-[color:var(--forest)] md:text-2xl lg:text-3xl">
+      <blockquote className="mt-8 font-display text-xl font-medium leading-[1.3] tracking-[-0.015em] text-[color:var(--forest)] md:text-2xl lg:text-[1.75rem]">
         &ldquo;{t.quote}&rdquo;
       </blockquote>
     </div>
-    <figcaption className="mt-10 flex items-center justify-between gap-4 border-t border-[color:var(--forest)]/10 pt-6">
+    <figcaption className="mt-10 border-t border-[color:var(--forest)]/10 pt-6">
       <Byline t={t} />
-      <span className="hidden text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted-foreground)] sm:inline">
-        Client since {t.since}
-      </span>
     </figcaption>
   </figure>
 );
 
-const MiniCard = ({ t, muted = false }: { t: Testimonial; muted?: boolean }) => (
-  <figure
-    className={`group flex h-full flex-col justify-between rounded-2xl border border-[color:var(--rule-color)] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-[color:var(--forest)]/30 md:p-7 ${
-      muted ? "bg-[color:var(--khaki-soft)]/60" : "bg-background"
-    }`}
-  >
+const MiniCard = ({ t }: { t: Testimonial }) => (
+  <figure className="group flex h-full flex-col justify-between rounded-2xl border border-[color:var(--rule-color)] bg-background p-6 transition-flow hover:border-[color:var(--forest)]/20 hover:bg-[color:var(--khaki-soft)]/50 md:p-7">
     <div>
-      <Stars n={t.rating} />
-      <blockquote className="mt-5 font-display text-base leading-[1.4] text-[color:var(--forest)] md:text-lg">
+      <div className="flex flex-col items-start gap-2">
+        <Stars n={t.rating} />
+        <span className="label-quiet">{t.service}</span>
+      </div>
+      <blockquote className="mt-5 text-left font-display text-base leading-[1.4] text-[color:var(--forest)] md:text-lg">
         &ldquo;{t.quote}&rdquo;
       </blockquote>
     </div>
-    <figcaption className="mt-6 flex items-center justify-between gap-3 border-t border-[color:var(--forest)]/10 pt-5">
-      <Byline t={t} tone={muted ? "khaki" : "forest"} />
-      <span className="shrink-0 text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-        {t.service}
-      </span>
+    <figcaption className="mt-6 border-t border-[color:var(--forest)]/10 pt-5">
+      <Byline t={t} />
     </figcaption>
   </figure>
 );
@@ -356,7 +339,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container-page section-y">
+      <section className="container-page py-16 md:py-20 lg:py-24">
         <SectionMarker n="02 / 05" label="Philosophy" />
         <div className="mt-8 grid gap-14 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-5">
@@ -398,7 +381,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[color:var(--rule-color)] bg-background section-y">
+      <section className="border-t border-[color:var(--rule-color)] bg-background py-16 md:py-20 lg:py-24">
         <div className="container-page">
           <div>
             <SectionMarker n="03 / 05" label="Voices" />
@@ -428,7 +411,7 @@ export default function HomePage() {
       </section>
 
       <section className="border-t border-[color:var(--rule-color)] bg-background">
-        <div className="container-page section-y">
+        <div className="container-page py-16 md:py-20 lg:py-24">
           <div className="min-w-0">
             <SectionMarker n="04 / 05" label="Services" />
             <h2 className="mt-5 max-w-xl font-display text-2xl font-medium leading-[1.1] tracking-[-0.015em] md:text-3xl">
@@ -441,7 +424,7 @@ export default function HomePage() {
               return (
                 <article
                   key={s.title}
-                  className={`group relative flex flex-col justify-between rounded-2xl bg-[color:var(--khaki-soft)] p-6 transition-flow hover:bg-[color:var(--khaki)] md:p-7 ${featured ? "md:row-span-2 md:col-span-1" : ""}`}
+                  className={`group relative flex flex-col justify-between rounded-2xl bg-[color:var(--khaki-soft)] p-6 transition-flow hover:bg-[color:var(--khaki-soft)]/50 md:p-7 ${featured ? "md:row-span-2 md:col-span-1" : ""}`}
                 >
                   <s.icon className="h-5 w-5 text-[color:var(--forest)]" strokeWidth={1.25} />
                   <div>
@@ -463,7 +446,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container-page section-y">
+      <section className="container-page py-16 md:py-20 lg:py-24">
         <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-4">
             <SectionMarker n="—" label="FAQ" />

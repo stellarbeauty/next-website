@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Phone } from "lucide-react";
 import { PillButton } from "@/components/PillButton";
-import { PHONE } from "@/lib/links";
+import { LINKS, PHONE } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -66,7 +66,15 @@ export default function ContactPage() {
           </div>
 
           <div className="mt-10">
-            <PillButton href={PHONE.href} label="Call to Book" size="md" fullWidth />
+            <PillButton
+              href={LINKS.booking}
+              label="Book Online"
+              size="md"
+              fullWidth
+              external
+              target="_blank"
+              rel="noopener noreferrer"
+            />
           </div>
         </aside>
 
