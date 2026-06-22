@@ -397,7 +397,7 @@ export default function HomePage() {
       </section>
 
       <section className="border-t border-[color:var(--rule-color)] bg-background">
-        <div className="container-page py-16 md:py-20 lg:py-24">
+        <div className="container-page pt-16 md:pt-20 lg:pt-24">
           <div className="min-w-0">
             <SectionMarker n="04 / 05" label="Services" />
             <h2 className="mt-5 max-w-xl font-display text-2xl font-medium leading-[1.1] tracking-[-0.015em] md:text-3xl">
@@ -430,15 +430,19 @@ export default function HomePage() {
             })}
           </div>
 
-          <div className="mt-16 md:mt-20">
-            <p className="label-quiet text-[color:var(--forest)]">Brands we trust</p>
-            <ul className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[color:var(--rule-color)] bg-[color:var(--rule-color)] sm:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-16 mb-16 md:mt-20 md:mb-20 lg:mt-24 lg:mb-24">
+            <div className="flex items-center gap-4">
+              <span className="h-px flex-1 bg-[color:var(--rule-color)]" aria-hidden />
+              <p className="label-quiet shrink-0 text-[color:var(--forest)]">Brands we trust</p>
+              <span className="h-px flex-1 bg-[color:var(--rule-color)]" aria-hidden />
+            </div>
+            <ul className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[color:var(--rule-color)] bg-[color:var(--rule-color)] sm:grid-cols-3 md:mt-20 lg:mt-24 lg:grid-cols-6">
               {BRANDS.map((brand) => (
                 <li
                   key={brand}
                   className="flex h-20 items-center justify-center bg-background px-6 transition-flow hover:bg-[color:var(--khaki-soft)] md:h-24"
                 >
-                  <span className="font-display text-base font-medium tracking-[-0.01em] text-[color:var(--forest)]/60 md:text-lg">
+                  <span className="font-display text-base font-medium tracking-[-0.01em] text-black md:text-lg">
                     {brand}
                   </span>
                 </li>
