@@ -18,6 +18,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PillButton } from "@/components/PillButton";
+import { PhilosophyStats } from "@/components/PhilosophyStats";
 import { RatingBadge } from "@/components/RatingBadge";
 import heroImg from "@/assets/hero-salon.jpg";
 
@@ -361,22 +362,7 @@ export default function HomePage() {
               matched to the standard of the work.
             </p>
 
-            <dl className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 border-t border-[color:var(--rule-color)] pt-8 sm:grid-cols-3">
-              {[
-                { k: "20+", v: "Years of experience" },
-                { k: "4", v: "Pro team members" },
-                { k: "3,000+", v: "Happy clients" },
-              ].map((s) => (
-                <div key={s.v}>
-                  <dt className="font-display text-2xl font-medium tracking-[-0.01em] text-[color:var(--forest)] md:text-3xl">
-                    {s.k}
-                  </dt>
-                  <dd className="mt-1 text-[11px] uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]">
-                    {s.v}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <PhilosophyStats />
           </div>
         </div>
       </section>
@@ -443,13 +429,29 @@ export default function HomePage() {
               );
             })}
           </div>
+
+          <div className="mt-16 md:mt-20">
+            <p className="label-quiet text-[color:var(--forest)]">Brands we trust</p>
+            <ul className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[color:var(--rule-color)] bg-[color:var(--rule-color)] sm:grid-cols-3 lg:grid-cols-6">
+              {BRANDS.map((brand) => (
+                <li
+                  key={brand}
+                  className="flex h-20 items-center justify-center bg-background px-6 transition-flow hover:bg-[color:var(--khaki-soft)] md:h-24"
+                >
+                  <span className="font-display text-base font-medium tracking-[-0.01em] text-[color:var(--forest)]/60 md:text-lg">
+                    {brand}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
-      <section className="container-page py-16 md:py-20 lg:py-24">
-        <div className="grid gap-14 md:grid-cols-12">
+      <section className="border-t border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)]/30 py-16 md:py-20 lg:py-24">
+        <div className="container-page grid gap-14 md:grid-cols-12">
           <div className="md:col-span-4">
-            <SectionMarker n="—" label="FAQ" />
+            <SectionMarker n="05 / 05" label="FAQ" />
             <h2 className="mt-5 font-display text-2xl font-medium leading-[1.1] tracking-[-0.015em] md:text-3xl">
               Questions, answered.
             </h2>
@@ -468,24 +470,6 @@ export default function HomePage() {
               ))}
             </Accordion>
           </div>
-        </div>
-      </section>
-
-      <section className="border-y border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)]/30">
-        <div className="container-page py-12 md:py-14">
-          <SectionMarker n="05 / 05" label="Brands we trust" />
-          <ul className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[color:var(--rule-color)] bg-[color:var(--rule-color)] sm:grid-cols-3 lg:grid-cols-6">
-            {BRANDS.map((brand) => (
-              <li
-                key={brand}
-                className="flex h-20 items-center justify-center bg-background px-6 transition-flow hover:bg-[color:var(--khaki-soft)] md:h-24"
-              >
-                <span className="font-display text-base font-medium tracking-[-0.01em] text-[color:var(--forest)]/60 md:text-lg">
-                  {brand}
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
     </>
