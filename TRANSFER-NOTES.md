@@ -39,7 +39,7 @@ Use `py-16 md:py-20 lg:py-24` (4rem / 5rem / 6rem) — NOT old `py-24 md:py-32`
 ## Commits
 - `95db88c` — Initial Next.js port
 - `f3b8186` — Partial UI improvements transfer
-- (next) — Polish: hover states, section spacing, testimonial layout, contact CTA, TRANSFER-NOTES
+- `1ee50f6` — Polish: hover states, section spacing, testimonial layout, contact CTA, TRANSFER-NOTES
 
 ## Polish pass (completed)
 - Home service cards: `hover:bg-[color:var(--khaki-soft)]/50`
