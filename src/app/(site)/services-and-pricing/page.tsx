@@ -11,54 +11,62 @@ export const metadata: Metadata = {
   },
 };
 
-const SERVICES: Array<{ id: string; title: string; body: string; from: string }> = [
+const SERVICES: Array<{ id: string; title: string; body: string; from: string; pricingAnchor: string }> = [
   {
     id: "haircuts",
     title: "Haircuts",
-    body: "Precision cuts for women, men and kids — from soft, lived-in shapes to clean classics.",
+    body: "Precision cuts for women, men and kids — from classic restyles to soft, lived-in shapes.",
     from: "from $26",
+    pricingAnchor: "women-s-haircut",
   },
   {
     id: "styling",
     title: "Hair Styling",
     body: "Blow-dries, sets and updos for events, weddings and everyday elegance.",
     from: "from $25",
+    pricingAnchor: "hair-styling",
   },
   {
     id: "perms-colours",
     title: "Perms & Colours",
     body: "Roots, toner, full colour, perms and spiral perms — lifted with care and consultation.",
     from: "from $45",
+    pricingAnchor: "perms-colours",
   },
   {
     id: "foils",
     title: "Full Head Foils",
     body: "Hand-placed foils for dimensional light and shade — partial, half head and full head.",
     from: "from $110",
+    pricingAnchor: "highlights",
   },
   {
     id: "treatment",
     title: "Hair Treatment",
     body: "Keratin smoothing, hair botox and deep conditioning that restore shine from within.",
     from: "from $50",
+    pricingAnchor: "hair-treatment",
   },
   {
     id: "makeup",
     title: "Makeup",
     body: "Soft daytime to editorial — application built around your features.",
     from: "from $65",
+    pricingAnchor: "makeup",
   },
   {
     id: "threading",
     title: "Threading & Waxing",
     body: "Face and brow threading and waxing — clean lines, calm hands, no rush.",
     from: "from $15",
+    pricingAnchor: "threading-waxing",
   },
   {
     id: "nails",
     title: "Nail Services",
     body: "Manicures, pedicures, gel and nail art — delivered by our on-site professional nail technician.",
     from: "from $25",
+    pricingAnchor: "nail-services",
   },
 ];
 
@@ -195,7 +203,7 @@ export default function ServicesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <section className="container-page pt-24 pb-16 md:pt-32 md:pb-20">
+      <section className="container-page pt-12 pb-8 md:pt-16 md:pb-10">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
             Services & Pricing
@@ -213,20 +221,18 @@ export default function ServicesPage() {
         </p>
       </section>
 
-      <section className="container-page pb-20 md:pb-28">
+      <section className="container-page pb-10 md:pb-14">
         <div className="hairline" />
         <ul>
           {SERVICES.map((s, i) => (
             <li key={s.id} className="border-b border-[color:var(--forest)]/10">
               <a
-                href={`#${s.id}`}
-                className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-5 py-7 transition-colors hover:bg-[color:var(--khaki-soft)]/40 md:gap-10 md:py-9"
+                href={`#${s.pricingAnchor}`}
+                className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-5 py-7 transition-flow hover:bg-[color:var(--khaki-soft)]/40 md:gap-10 md:py-9"
               >
-                <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)] tabular-nums">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <span className="label-quiet tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                 <div className="min-w-0">
-                  <h3 className="font-display text-lg font-medium uppercase tracking-[-0.005em] text-[color:var(--forest)] transition-transform duration-300 group-hover:translate-x-1 md:text-xl">
+                  <h3 className="font-display text-lg font-medium tracking-[-0.005em] text-[color:var(--forest)] md:text-xl">
                     {s.title}
                   </h3>
                   <p className="measure mt-2 hidden text-sm leading-relaxed text-[color:var(--muted-foreground)] sm:block">
@@ -235,7 +241,7 @@ export default function ServicesPage() {
                 </div>
                 <span className="inline-flex shrink-0 items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--forest)]">
                   <span className="hidden md:inline">{s.from}</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-45" />
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:rotate-45" />
                 </span>
               </a>
             </li>
@@ -244,7 +250,7 @@ export default function ServicesPage() {
       </section>
 
       <section className="bg-[color:var(--khaki-soft)]">
-        <div className="container-page py-20 md:py-28">
+        <div className="container-page py-10 md:py-14">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">Pricing</p>
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">

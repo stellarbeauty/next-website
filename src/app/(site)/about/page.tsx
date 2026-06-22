@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Instagram, Star } from "lucide-react";
+import { Instagram } from "lucide-react";
+import { RatingBadge } from "@/components/RatingBadge";
 import portrait from "@/assets/about-portrait.jpg";
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="container-page pt-24 pb-16 md:pt-32 md:pb-20">
+      <section className="container-page pt-12 pb-8 md:pt-16 md:pb-10">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">About</p>
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
@@ -27,30 +28,13 @@ export default function AboutPage() {
         <h1 className="mt-8 max-w-3xl font-display text-3xl font-medium leading-[1.1] tracking-[-0.02em] text-[color:var(--forest)] md:text-5xl">
           We believe modern beauty is quiet, considered and deeply personal.
         </h1>
-        <a
-          href="https://www.google.com/search?q=Stellar+Beauty+Port+Coquitlam"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="4.9 star rating from 287 Google reviews"
-          className="mt-10 inline-flex items-center gap-4 rounded-full border border-[color:var(--rule-color)] bg-white/60 px-5 py-2.5 backdrop-blur transition-colors hover:border-[color:var(--forest)]/30"
-        >
-          <span className="flex items-center gap-0.5" aria-hidden="true">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-3.5 w-3.5 fill-[color:var(--forest)] text-[color:var(--forest)]" />
-            ))}
-          </span>
-          <span className="text-sm text-[color:var(--forest)]">
-            <span className="font-medium">4.9</span>
-            <span className="mx-2 text-[color:var(--muted-foreground)]">·</span>
-            <span>287 Google reviews</span>
-          </span>
-        </a>
-        <div className="mt-16 hairline" />
+        <RatingBadge className="mt-10" />
+        <div className="mt-8 hairline" />
       </section>
 
-      <section className="overflow-hidden pb-20 md:pb-28">
+      <section className="pb-10 pt-10 md:pb-14 md:pt-14">
         <div className="container-page grid gap-12 md:grid-cols-12 md:gap-16">
-          <div className="md:col-span-5 md:-ml-8 lg:-ml-12">
+          <div className="md:col-span-5">
             <Image
               src={portrait}
               alt="Stellar Beauty stylist working with a client in the Port Coquitlam salon — natural daylight, warm khaki interior"
@@ -98,10 +82,10 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-[color:var(--khaki-soft)]">
-        <div className="container-page py-20 md:py-24">
+        <div className="container-page py-10 md:py-12">
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">Values</p>
           <div className="mt-10 hairline" />
-          <div className="grid grid-cols-1 md:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3">
             {[
               { n: "01", t: "Craft", b: "Continual training and a relentless attention to the small things." },
               { n: "02", t: "Care", b: "Clean formulas, calm rooms, no rushed appointments." },
@@ -109,7 +93,7 @@ export default function AboutPage() {
             ].map((v, i) => (
               <div
                 key={v.n}
-                className={`flex flex-col gap-3 py-10 md:py-14 ${i > 0 ? "border-t border-[color:var(--forest)]/10 md:border-t-0 md:border-l md:pl-10" : "md:pr-10"}`}
+                className={`flex flex-col gap-3 py-5 md:py-7 ${i > 0 ? "border-t border-[color:var(--forest)]/10 md:border-t-0 md:border-l md:pl-10" : "md:pr-10"}`}
               >
                 <p className="font-display text-3xl font-light tracking-[-0.01em] text-[color:var(--forest)]">{v.n}</p>
                 <h3 className="mt-4 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
@@ -122,7 +106,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="container-page py-24 md:py-32">
+      <section className="container-page py-12 md:py-16">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
             Meet the Team
@@ -134,8 +118,8 @@ export default function AboutPage() {
         <h2 className="mt-6 max-w-2xl font-display text-2xl font-medium leading-[1.15] tracking-[-0.015em] text-[color:var(--forest)] md:text-3xl">
           Quietly skilled, generously attentive.
         </h2>
-        <div className="mt-12 hairline" />
-        <ul className="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 hairline" />
+        <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { name: "Amelia Rourke", role: "Founder · Creative Director", ig: "amelia.stellar", seed: "amelia-rourke" },
             { name: "Priya Shah", role: "Senior Colourist", ig: "priya.colour", seed: "priya-shah" },
@@ -149,7 +133,7 @@ export default function AboutPage() {
                   alt={`${m.name}, ${m.role} at Stellar Beauty in Port Coquitlam`}
                   width={800}
                   height={1000}
-                  className="aspect-[4/5] w-full object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:grayscale-0"
+                  className="aspect-[4/5] w-full object-cover grayscale transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0"
                 />
                 {m.ig && (
                   <a
@@ -178,7 +162,7 @@ export default function AboutPage() {
       </section>
 
       <section className="border-t border-[color:var(--rule-color)] bg-white">
-        <div className="container-page py-24 md:py-32">
+        <div className="container-page py-12 md:py-16">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">Gallery</p>
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
@@ -188,8 +172,8 @@ export default function AboutPage() {
           <h2 className="mt-6 max-w-2xl font-display text-2xl font-medium leading-[1.15] tracking-[-0.015em] text-[color:var(--forest)] md:text-3xl">
             Light, texture, and the quiet rituals of the chair.
           </h2>
-          <div className="mt-12 hairline" />
-          <div className="mt-12 columns-2 gap-4 md:columns-3 md:gap-6 lg:columns-4">
+          <div className="mt-6 hairline" />
+          <div className="mt-6 columns-2 gap-4 md:columns-3 md:gap-6 lg:columns-4">
             {[
               { seed: "studio-01", h: 900, alt: "North-facing window light across the styling stations" },
               { seed: "studio-02", h: 1200, alt: "Hand applying balayage colour to long hair" },

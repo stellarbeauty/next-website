@@ -8,10 +8,8 @@ import {
   Droplets,
   Flower2,
   Leaf,
-  ArrowRight,
   Star,
   Quote,
-  BadgeCheck,
   Hand,
 } from "lucide-react";
 import {
@@ -21,6 +19,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PillButton } from "@/components/PillButton";
+import { RatingBadge } from "@/components/RatingBadge";
 import heroImg from "@/assets/hero-salon.jpg";
 
 export const metadata: Metadata = {
@@ -64,9 +63,9 @@ const SERVICES = [
 ];
 
 const SectionMarker = ({ n, label }: { n: string; label: string }) => (
-  <div className="flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
+  <div className="flex items-center gap-3 label-quiet text-[color:var(--forest)]">
     <span>— {n}</span>
-    <span className="h-px w-8 bg-[color:var(--forest)]/30" />
+    <span className="h-px w-6 bg-[color:var(--forest)]/20" />
     <span>{label}</span>
   </div>
 );
@@ -231,7 +230,7 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
-const BRANDS = ["Davines", "Olaplex", "Kérastase", "Wella", "Schwarzkopf", "Moroccanoil"];
+const BRANDS = ["Schwarzkopf", "Olaplex", "Redken", "Wella", "Moroccanoil", "Chi"];
 
 const FAQS = [
   {
@@ -327,26 +326,23 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <section className="relative w-full overflow-hidden bg-[color:var(--khaki-soft)]">
-        <div className="container-page grid min-h-[78vh] grid-cols-1 items-start gap-10 pt-16 pb-20 md:pt-20 md:pb-24 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-7">
+        <div className="container-page grid min-h-[82vh] grid-cols-1 items-start gap-12 pt-10 pb-12 md:pt-14 md:pb-16 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7 lg:pt-4">
             <SectionMarker n="01 / 05" label="Stellar Beauty" />
-            <h1 className="mt-10 font-display text-3xl font-medium leading-[1.08] tracking-[-0.02em] text-[color:var(--forest)] md:text-4xl lg:text-5xl">
+            <h1 className="mt-12 font-display text-3xl font-medium leading-[1.08] tracking-[-0.02em] text-[color:var(--forest)] md:text-4xl lg:text-[2.75rem]">
               Beauty, built with quiet precision.
             </h1>
-            <p className="mt-6 measure text-base leading-relaxed text-[color:var(--muted-foreground)] md:text-md">
-              Considered cuts, colour and skin care from a small, focused team — Port Coquitlam&apos;s premier
-              destination for an unforgettable beauty experience.
+            <p className="mt-6 measure text-base leading-relaxed text-[color:var(--muted-foreground)]">
+              Considered cuts, colour and care from a small, focused team in Port Coquitlam.
             </p>
-            <div className="mt-8">
+            <div className="mt-10">
               <PillButton href="/services-and-pricing" label="Explore Services" size="md" variant="ghost" />
             </div>
-            <p className="mt-14 text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-              Port Coquitlam, BC · Est. 2018
-            </p>
+            <p className="mt-16 label-quiet">Port Coquitlam, BC · Est. 2018</p>
           </div>
 
-          <div className="lg:col-span-5 lg:mt-16">
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-[0_30px_60px_-30px_rgba(22,44,36,0.35)]">
+          <div className="lg:col-span-5 lg:mt-20">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-[0_24px_48px_-24px_rgba(22,44,36,0.25)]">
               <Image
                 src={heroImg}
                 alt="Stellar Beauty salon interior in Port Coquitlam — natural light, sage green accents and warm khaki millwork"
@@ -360,32 +356,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container-page py-24 md:py-32">
+      <section className="container-page section-y">
         <SectionMarker n="02 / 05" label="Philosophy" />
-        <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="mt-8 grid gap-14 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-5">
-            <h2 className="font-display text-2xl font-medium leading-[1.1] tracking-[-0.02em] text-[color:var(--forest)] md:text-3xl lg:text-4xl">
-              Two decades of craft, quietly refined into a salon you&apos;ll return to.
+            <h2 className="font-display text-2xl font-medium leading-[1.1] tracking-[-0.02em] text-[color:var(--forest)] md:text-3xl lg:text-[2rem]">
+              Two decades of craft, quietly refined.
             </h2>
-            <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-              Led by Minoo · Owner & Senior Stylist
-            </p>
+            <p className="mt-8 label-quiet">Led by Minoo · Owner & Senior Stylist</p>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <p className="text-base leading-relaxed text-[color:var(--forest)]/85 md:text-md">
-              Formerly known as <em className="not-italic font-medium text-[color:var(--forest)]">Parkside Beauty Parlour</em>
-              , Stellar Beauty has evolved under the ownership of{" "}
-              <span className="font-medium text-[color:var(--forest)]">Minoo</span> — a beauty industry professional
-              with more than twenty years of hands-on experience.
+            <p className="text-base leading-relaxed text-[color:var(--forest)]/85">
+              Formerly{" "}
+              <em className="not-italic font-medium text-[color:var(--forest)]">Parkside Beauty Parlour</em>, Stellar
+              Beauty has evolved under{" "}
+              <span className="font-medium text-[color:var(--forest)]">Minoo</span> — twenty years of hands-on
+              experience, a talented team, and results that hold up to the mirror.
             </p>
             <p className="mt-5 text-base leading-relaxed text-[color:var(--muted-foreground)]">
-              Through her expertise, attention to detail and a quiet commitment to exceptional service, she has built a
-              talented team of stylists, colourists and beauty specialists. Together they deliver results that hold up to
-              the mirror — and an experience guests look forward to returning to.
-            </p>
-            <p className="mt-5 text-base leading-relaxed text-[color:var(--muted-foreground)]">
-              The salon itself is designed like a piece of architecture: calm, intentional and generous in light — a
-              setting matched to the standard of the work.
+              The salon is designed like a piece of architecture: calm, intentional, generous in light — a setting
+              matched to the standard of the work.
             </p>
 
             <dl className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 border-t border-[color:var(--rule-color)] pt-8 sm:grid-cols-3">
@@ -408,46 +398,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[color:var(--rule-color)] bg-background py-24 md:py-32">
+      <section className="border-t border-[color:var(--rule-color)] bg-background section-y">
         <div className="container-page">
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <SectionMarker n="03 / 05" label="Voices" />
-              <h2 className="mt-4 font-display text-2xl font-medium leading-[1.1] tracking-[-0.015em] text-[color:var(--forest)] md:text-3xl lg:text-4xl">
-                Trusted by guests who notice the details.
-              </h2>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-[color:var(--muted-foreground)]">
-                A small selection of unedited words from people who&apos;ve sat in our chair — across cut, colour,
-                bridal and treatment.
-              </p>
-            </div>
-            <div className="lg:col-span-5 lg:justify-self-end">
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-[color:var(--forest)]">
-                <div className="flex items-center gap-2">
-                  <div className="flex" aria-hidden>
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <Star
-                        key={i}
-                        className="h-4 w-4 fill-[color:var(--forest)] text-[color:var(--forest)]"
-                        strokeWidth={1.25}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm font-medium">4.9</span>
-                  <span className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-                    287 Google reviews
-                  </span>
-                </div>
-                <span className="hidden h-3 w-px bg-[color:var(--rule-color)] lg:inline-block" />
-                <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-                  <BadgeCheck className="h-3.5 w-3.5 text-[color:var(--forest)]" strokeWidth={1.5} />
-                  Verified clients
-                </div>
-              </div>
+          <div>
+            <SectionMarker n="03 / 05" label="Voices" />
+            <h2 className="mt-5 font-display text-2xl font-medium leading-[1.1] tracking-[-0.015em] text-[color:var(--forest)] md:text-3xl">
+              Trusted by guests who notice the details.
+            </h2>
+            <div className="mt-4">
+              <RatingBadge variant="inline" />
             </div>
           </div>
 
-          <div className="mt-14 grid gap-5 lg:grid-cols-12 lg:gap-6">
+          <div className="mt-10 grid gap-5 lg:grid-cols-12 lg:gap-6">
             <FeaturedCard t={TESTIMONIALS[0]} />
             <div className="grid gap-5 lg:col-span-5 lg:gap-6">
               {TESTIMONIALS.slice(1, 3).map((t) => (
@@ -457,28 +420,28 @@ export default function HomePage() {
           </div>
 
           <div className="mt-5 grid gap-5 sm:grid-cols-2 md:mt-6 lg:grid-cols-3 lg:gap-6">
-            {TESTIMONIALS.slice(3).map((t, i) => (
-              <MiniCard key={t.name} t={t} muted={i === 1} />
+            {TESTIMONIALS.slice(3).map((t) => (
+              <MiniCard key={t.name} t={t} />
             ))}
           </div>
         </div>
       </section>
 
       <section className="border-t border-[color:var(--rule-color)] bg-background">
-        <div className="container-page py-24 md:py-32">
+        <div className="container-page section-y">
           <div className="min-w-0">
             <SectionMarker n="04 / 05" label="Services" />
-            <h2 className="mt-4 max-w-xl font-display text-2xl font-medium leading-[1.1] tracking-[-0.015em] md:text-3xl">
+            <h2 className="mt-5 max-w-xl font-display text-2xl font-medium leading-[1.1] tracking-[-0.015em] md:text-3xl">
               A focused, modern offering.
             </h2>
           </div>
-          <div className="mt-14 grid auto-rows-[minmax(180px,auto)] grid-cols-1 gap-3 md:grid-cols-3 md:auto-rows-[200px]">
+          <div className="mt-10 grid auto-rows-[minmax(180px,auto)] grid-cols-1 gap-3 md:grid-cols-3 md:auto-rows-[200px]">
             {SERVICES.map((s) => {
               const featured = s.featured;
               return (
                 <article
                   key={s.title}
-                  className={`group relative flex flex-col justify-between rounded-2xl bg-[color:var(--khaki-soft)] p-6 transition-colors hover:bg-[color:var(--khaki)] md:p-7 ${featured ? "md:row-span-2 md:col-span-1" : ""}`}
+                  className={`group relative flex flex-col justify-between rounded-2xl bg-[color:var(--khaki-soft)] p-6 transition-flow hover:bg-[color:var(--khaki)] md:p-7 ${featured ? "md:row-span-2 md:col-span-1" : ""}`}
                 >
                   <s.icon className="h-5 w-5 text-[color:var(--forest)]" strokeWidth={1.25} />
                   <div>
@@ -500,39 +463,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)]/40">
-        <div className="container-page py-20 md:py-24">
-          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <SectionMarker n="05 / 05" label="Brands we trust" />
-            <p className="text-sm text-[color:var(--muted-foreground)] md:max-w-xs md:text-right">
-              Professional-grade products selected for performance, integrity and the health of your hair.
-            </p>
-          </div>
-          <ul className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[color:var(--rule-color)] bg-[color:var(--rule-color)] sm:grid-cols-3 lg:grid-cols-6">
-            {BRANDS.map((brand) => (
-              <li
-                key={brand}
-                className="flex h-24 items-center justify-center bg-background px-6 transition-colors hover:bg-[color:var(--khaki-soft)] md:h-28"
-              >
-                <span className="font-display text-lg font-medium tracking-[-0.01em] text-[color:var(--forest)]/70 md:text-xl">
-                  {brand}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="container-page py-24 md:py-32">
-        <div className="grid gap-12 md:grid-cols-12">
+      <section className="container-page section-y">
+        <div className="grid gap-14 md:grid-cols-12">
           <div className="md:col-span-4">
             <SectionMarker n="—" label="FAQ" />
-            <h2 className="mt-4 font-display text-2xl font-medium leading-[1.1] tracking-[-0.015em] md:text-3xl">
+            <h2 className="mt-5 font-display text-2xl font-medium leading-[1.1] tracking-[-0.015em] md:text-3xl">
               Questions, answered.
             </h2>
-            <p className="mt-4 max-w-sm text-sm text-[color:var(--muted-foreground)]">
-              Everything you need to know before booking your first visit to Stellar Beauty in Port Coquitlam.
-            </p>
           </div>
           <div className="md:col-span-8">
             <Accordion type="single" collapsible className="border-t border-[color:var(--rule-color)]">
@@ -551,34 +488,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[color:var(--khaki-soft)]">
-        <div className="container-page grid gap-6 py-12 md:grid-cols-4 md:items-center md:py-14">
-          <div>
-            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-              Visit
-            </p>
-            <p className="mt-1 text-sm text-[color:var(--forest)]">3040A Flint St, Port Coquitlam</p>
-          </div>
-          <div>
-            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-              Hours
-            </p>
-            <p className="mt-1 text-sm text-[color:var(--forest)]">Tue – Sat · By appointment</p>
-          </div>
-          <div>
-            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-              Call
-            </p>
-            <a
-              href="tel:+16049444207"
-              className="mt-1 inline-flex items-center gap-2 text-sm text-[color:var(--forest)] hover:underline"
-            >
-              (604) 944-4207 <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-          </div>
-          <div className="md:justify-self-end">
-            <PillButton href="/contact" label="Book Now" size="md" />
-          </div>
+      <section className="border-y border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)]/30">
+        <div className="container-page py-12 md:py-14">
+          <SectionMarker n="05 / 05" label="Brands we trust" />
+          <ul className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[color:var(--rule-color)] bg-[color:var(--rule-color)] sm:grid-cols-3 lg:grid-cols-6">
+            {BRANDS.map((brand) => (
+              <li
+                key={brand}
+                className="flex h-20 items-center justify-center bg-background px-6 transition-flow hover:bg-[color:var(--khaki-soft)] md:h-24"
+              >
+                <span className="font-display text-base font-medium tracking-[-0.01em] text-[color:var(--forest)]/60 md:text-lg">
+                  {brand}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>
