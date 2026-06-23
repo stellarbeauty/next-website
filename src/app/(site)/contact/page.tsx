@@ -26,9 +26,9 @@ const phoneClass =
 
 export default function ContactPage() {
   return (
-    <section className="w-full">
+    <section className="w-full lg:pt-[var(--site-header-height)]">
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr]">
-        <aside className="order-1 lg:order-2 bg-[color:var(--khaki-soft)] p-8 md:p-10">
+        <aside className="order-1 bg-[color:var(--khaki-soft)] p-8 pt-[calc(var(--site-header-height)+2rem)] md:p-10 md:pt-[calc(var(--site-header-height)+2.5rem)] lg:order-2 lg:pt-10">
           <p className="label-quiet">Contact</p>
           <h1 className="mt-3 font-display text-xl font-medium leading-[1.1] tracking-[-0.015em] text-[color:var(--forest)] md:text-2xl">
             Come find us in Port Coquitlam.

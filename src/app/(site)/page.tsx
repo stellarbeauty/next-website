@@ -310,7 +310,7 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <section className="relative w-full overflow-hidden bg-[color:var(--khaki-soft)]">
-        <div className="container-page grid min-h-[82vh] grid-cols-1 items-start gap-12 pt-10 pb-12 md:pt-14 md:pb-16 lg:grid-cols-12 lg:gap-16">
+        <div className="container-page grid min-h-[82vh] grid-cols-1 items-start gap-12 pt-[calc(var(--site-header-height)+2.5rem)] pb-12 md:pt-[calc(var(--site-header-height)+3.5rem)] md:pb-16 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7 lg:pt-4">
             <SectionMarker n="01 / 05" label="Stellar Beauty" />
             <h1 className="mt-12 font-display text-3xl font-medium leading-[1.08] tracking-[-0.02em] text-[color:var(--forest)] md:text-4xl lg:text-[2.75rem]">
@@ -340,7 +340,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container-page py-16 md:py-20 lg:py-24">
+      <section id="philosophy" className="container-page py-16 md:py-20 lg:py-24">
         <SectionMarker n="02 / 05" label="Philosophy" />
         <div className="mt-8 grid gap-14 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-5">
@@ -367,7 +367,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[color:var(--rule-color)] bg-background py-16 md:py-20 lg:py-24">
+      <section id="voices" className="border-t border-[color:var(--rule-color)] bg-background py-16 md:py-20 lg:py-24">
         <div className="container-page">
           <div>
             <SectionMarker n="03 / 05" label="Voices" />
@@ -396,7 +396,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[color:var(--rule-color)] bg-background">
+      <section id="services" className="border-t border-[color:var(--rule-color)] bg-background">
         <div className="container-page pt-16 md:pt-20 lg:pt-24">
           <div className="min-w-0">
             <SectionMarker n="04 / 05" label="Services" />
@@ -452,7 +452,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)]/30 py-16 md:py-20 lg:py-24">
+      <section id="faq" className="border-t border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)]/30 py-16 md:py-20 lg:py-24">
         <div className="container-page grid gap-14 md:grid-cols-12">
           <div className="md:col-span-4">
             <SectionMarker n="05 / 05" label="FAQ" />

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="container-page pt-12 pb-8 md:pt-16 md:pb-10">
+      <section className="container-page pt-[calc(var(--site-header-height)+3rem)] pb-8 md:pt-[calc(var(--site-header-height)+4rem)] md:pb-10">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">About</p>
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">

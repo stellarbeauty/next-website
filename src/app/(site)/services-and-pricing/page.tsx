@@ -203,7 +203,7 @@ export default function ServicesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <section className="container-page pt-12 pb-8 md:pt-16 md:pb-10">
+      <section className="container-page pt-[calc(var(--site-header-height)+3rem)] pb-8 md:pt-[calc(var(--site-header-height)+4rem)] md:pb-10">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
             Services & Pricing
@@ -266,7 +266,7 @@ export default function ServicesPage() {
               <div
                 key={g.group}
                 id={g.group.toLowerCase().replace(/[^a-z]+/g, "-")}
-                className="grid gap-8 md:grid-cols-12 md:gap-12"
+                className="anchor-target grid gap-8 md:grid-cols-12 md:gap-12"
               >
                 <div className="md:col-span-3">
                   <h3 className="text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
