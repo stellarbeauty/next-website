@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Size = "sm" | "md" | "lg";
@@ -12,7 +12,7 @@ type CommonProps = {
   variant?: Variant;
   className?: string;
   fullWidth?: boolean;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
 type TextButtonProps = CommonProps & {
@@ -42,24 +42,32 @@ type AnchorProps = (TextButtonProps | IconButtonProps) & {
 
 export type PillButtonProps = LinkProps | AnchorProps;
 
-const TEXT_SIZES: Record<Size, { pad: string; gap: string; icon: string; iconSize: string }> = {
-  sm: { pad: "py-2 pl-4 pr-2", gap: "gap-2.5", icon: "h-6 w-6", iconSize: "h-3 w-3" },
-  md: { pad: "py-2.5 pl-5 pr-2.5", gap: "gap-3", icon: "h-7 w-7", iconSize: "h-3.5 w-3.5" },
-  lg: { pad: "py-3 pl-6 pr-3", gap: "gap-3.5", icon: "h-8 w-8", iconSize: "h-4 w-4" },
+const SIZE_STYLES: Record<
+  Size,
+  {
+    text: { pad: string; gap: string; iconBox: string; iconSize: string };
+    iconOnly: { box: string; iconSize: string };
+    alternative: { text: string; arrowSize: string; gap: string };
+  }
+> = {
+  sm: {
+    text: { pad: "py-2 pl-4 pr-2", gap: "gap-2.5", iconBox: "h-6 w-6", iconSize: "h-3 w-3" },
+    iconOnly: { box: "h-8 w-8", iconSize: "h-3.5 w-3.5" },
+    alternative: { text: "text-[11px] tracking-[0.14em]", arrowSize: "h-3 w-3", gap: "gap-2" },
+  },
+  md: {
+    text: { pad: "py-2.5 pl-5 pr-2.5", gap: "gap-3", iconBox: "h-7 w-7", iconSize: "h-3.5 w-3.5" },
+    iconOnly: { box: "h-9 w-9", iconSize: "h-4 w-4" },
+    alternative: { text: "text-xs tracking-[0.12em]", arrowSize: "h-3.5 w-3.5", gap: "gap-2" },
+  },
+  lg: {
+    text: { pad: "py-3 pl-6 pr-3", gap: "gap-3.5", iconBox: "h-8 w-8", iconSize: "h-4 w-4" },
+    iconOnly: { box: "h-10 w-10", iconSize: "h-4 w-4" },
+    alternative: { text: "text-sm tracking-[0.1em]", arrowSize: "h-4 w-4", gap: "gap-2.5" },
+  },
 };
 
-const ICON_SIZES: Record<Size, { box: string; icon: string }> = {
-  sm: { box: "h-8 w-8", icon: "h-3.5 w-3.5" },
-  md: { box: "h-9 w-9", icon: "h-4 w-4" },
-  lg: { box: "h-10 w-10", icon: "h-4 w-4" },
-};
-
-const ALTERNATIVE_SIZES: Record<Size, { text: string; arrow: string; gap: string }> = {
-  sm: { text: "text-[11px] tracking-[0.14em]", arrow: "h-3 w-3", gap: "gap-2" },
-  md: { text: "text-xs tracking-[0.12em]", arrow: "h-3.5 w-3.5", gap: "gap-2" },
-  lg: { text: "text-sm tracking-[0.1em]", arrow: "h-4 w-4", gap: "gap-2.5" },
-};
-
+const TRANSPARENT_BORDER_CLASSES = "border border-transparent";
 const PRIMARY_BORDER_CLASSES = "border border-[color:var(--rule-color-hover)]";
 
 const FROSTED_GLASS_CLASSES = "bg-[color:var(--khaki-soft)]/25 backdrop-blur-sm";
@@ -67,39 +75,47 @@ const DARK_FROSTED_GLASS_CLASSES = "bg-[color:var(--muted-foreground)]/75 backdr
 
 const VARIANT_CLASSES: Record<Variant, string> = {
   primary: `${PRIMARY_BORDER_CLASSES} ${FROSTED_GLASS_CLASSES} text-[color:var(--forest)]`,
-  secondary: `border border-transparent ${DARK_FROSTED_GLASS_CLASSES} text-[color:var(--khaki-soft)]`,
-  alternative: "border border-transparent bg-transparent text-[color:var(--muted-foreground)]",
+  secondary: `${TRANSPARENT_BORDER_CLASSES} ${DARK_FROSTED_GLASS_CLASSES} text-[color:var(--khaki-soft)]`,
+  alternative: `${TRANSPARENT_BORDER_CLASSES} bg-transparent text-[color:var(--muted-foreground)]`,
 };
 
 const ICON_CHIP_CLASSES: Record<Variant, string> = {
-  primary: "border border-transparent bg-[color:var(--muted-foreground)] text-[color:var(--khaki-soft)]",
-  secondary: "border border-transparent bg-[color:var(--khaki-soft)] text-[color:var(--muted-foreground)]",
+  primary: `${TRANSPARENT_BORDER_CLASSES} bg-[color:var(--muted-foreground)] text-[color:var(--khaki-soft)]`,
+  secondary: `${TRANSPARENT_BORDER_CLASSES} bg-[color:var(--khaki-soft)] text-[color:var(--muted-foreground)]`,
   alternative: "bg-transparent text-[color:var(--muted-foreground)]",
 };
 
 const ICON_ONLY_CLASSES: Record<IconVariant, string> = {
-  transparent: `${PRIMARY_BORDER_CLASSES} ${FROSTED_GLASS_CLASSES} text-[color:var(--forest)]`,
-  filled: `border border-transparent ${DARK_FROSTED_GLASS_CLASSES} text-[color:var(--khaki-soft)]`,
+  transparent: VARIANT_CLASSES.primary,
+  filled: VARIANT_CLASSES.secondary,
 };
 
 const ARROW_HOVER_ROTATE =
   "transition-transform duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none motion-reduce:group-hover:rotate-0 group-hover:rotate-45";
+const ALTERNATIVE_ARROW_SLIDE =
+  "shrink-0 text-[color:var(--muted-foreground)] transition-transform duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 group-hover:translate-x-0.5";
+
+function withNoopenerRel(rel?: string) {
+  const parts = new Set((rel ?? "").split(/\s+/).filter(Boolean));
+  parts.add("noopener");
+  parts.add("noreferrer");
+  return [...parts].join(" ");
+}
 
 export function ArrowIcon({ className, size = "md" }: { className?: string; size?: Size }) {
-  const iconSize = TEXT_SIZES[size].iconSize;
+  const iconSize = SIZE_STYLES[size].text.iconSize;
   return <ArrowUpRight className={cn(iconSize, className)} strokeWidth={1.5} aria-hidden />;
 }
 
 function ButtonArrow({ size, variant }: { size: Size; variant: Variant }) {
-  const s = TEXT_SIZES[size];
+  const styles = SIZE_STYLES[size];
 
   if (variant === "alternative") {
-    const alt = ALTERNATIVE_SIZES[size];
     return (
       <ArrowRight
         className={cn(
-          alt.arrow,
-          "shrink-0 text-[color:var(--muted-foreground)] transition-transform duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 group-hover:translate-x-0.5",
+          styles.alternative.arrowSize,
+          ALTERNATIVE_ARROW_SLIDE,
           ICON_CHIP_CLASSES[variant],
         )}
         strokeWidth={1.5}
@@ -110,21 +126,25 @@ function ButtonArrow({ size, variant }: { size: Size; variant: Variant }) {
 
   return (
     <span
-      className={cn("flex shrink-0 items-center justify-center rounded-full", s.icon, ICON_CHIP_CLASSES[variant])}
+      className={cn(
+        "flex shrink-0 items-center justify-center rounded-full",
+        styles.text.iconBox,
+        ICON_CHIP_CLASSES[variant],
+      )}
     >
-      <ArrowUpRight className={cn(s.iconSize, ARROW_HOVER_ROTATE)} strokeWidth={1.5} aria-hidden />
+      <ArrowUpRight className={cn(styles.text.iconSize, ARROW_HOVER_ROTATE)} strokeWidth={1.5} aria-hidden />
     </span>
   );
 }
 
 function renderInner(props: PillButtonProps) {
   const size = props.size ?? "md";
+  const styles = SIZE_STYLES[size];
 
   if ("iconOnly" in props && props.iconOnly) {
-    const s = ICON_SIZES[size];
     return (
-      <span className={cn("flex items-center justify-center rounded-full", s.box)}>
-        <ArrowUpRight className={cn(s.icon, ARROW_HOVER_ROTATE)} strokeWidth={1.5} />
+      <span className={cn("flex items-center justify-center rounded-full", styles.iconOnly.box)}>
+        <ArrowUpRight className={cn(styles.iconOnly.iconSize, ARROW_HOVER_ROTATE)} strokeWidth={1.5} aria-hidden />
       </span>
     );
   }
@@ -141,10 +161,10 @@ function renderInner(props: PillButtonProps) {
 
 export function PillButton(props: PillButtonProps) {
   const { size = "md", variant = "primary", className = "", fullWidth = false, href, onClick } = props;
+  const styles = SIZE_STYLES[size];
   const isIconOnly = "iconOnly" in props && props.iconOnly;
   const isAlternative = variant === "alternative";
   const iconVariant = isIconOnly ? (props.iconVariant ?? "transparent") : undefined;
-  const alternativeSize = ALTERNATIVE_SIZES[size];
 
   const base = cn(
     "group",
@@ -152,18 +172,18 @@ export function PillButton(props: PillButtonProps) {
     !isAlternative && "nav-link-text",
     !isAlternative && !isIconOnly && "rounded-full",
     isIconOnly
-      ? cn(ICON_SIZES[size].box, ICON_ONLY_CLASSES[iconVariant!], "justify-center rounded-full p-0")
+      ? cn(styles.iconOnly.box, ICON_ONLY_CLASSES[iconVariant!], "justify-center rounded-full p-0")
       : isAlternative
         ? cn(
             "rounded-none py-2 font-medium uppercase",
-            alternativeSize.text,
-            alternativeSize.gap,
+            styles.alternative.text,
+            styles.alternative.gap,
             fullWidth ? "w-full justify-between" : "",
             VARIANT_CLASSES[variant],
           )
         : cn(
-            TEXT_SIZES[size].pad,
-            TEXT_SIZES[size].gap,
+            styles.text.pad,
+            styles.text.gap,
             fullWidth ? "w-full justify-between" : "",
             VARIANT_CLASSES[variant],
           ),
@@ -175,16 +195,18 @@ export function PillButton(props: PillButtonProps) {
   const inner = renderInner(props);
 
   if ("external" in props && props.external) {
+    const rel = props.target === "_blank" ? withNoopenerRel(props.rel) : props.rel;
     return (
-      <a href={href} target={props.target} rel={props.rel} onClick={onClick} className={base} {...ariaProps}>
+      <a href={href} target={props.target} rel={rel} onClick={onClick} className={base} {...ariaProps}>
         {inner}
       </a>
     );
   }
 
-  const isExternal = href.startsWith("tel:") || href.startsWith("mailto:");
+  const isExternalHref =
+    href.startsWith("tel:") || href.startsWith("mailto:") || href.startsWith("http://") || href.startsWith("https://") || href.startsWith("//");
 
-  if (isExternal) {
+  if (isExternalHref) {
     return (
       <a href={href} onClick={onClick} className={base} {...ariaProps}>
         {inner}
