@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { PillButton } from "@/components/PillButton";
 import { LINKS } from "@/lib/links";
 
 const NAV = [
@@ -109,39 +110,19 @@ function MobileNavLink({
   );
 }
 
-function BookNowLink({
-  className = "",
-  onClick,
-  showIcon = true,
-  size = "sm",
-}: {
-  className?: string;
-  onClick?: () => void;
-  showIcon?: boolean;
-  size?: "sm" | "lg";
-}) {
-  const textClass =
-    size === "lg"
-      ? "text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-300"
-      : NAV_LINK_TEXT;
-
+function BookNowButton({ className = "", onClick }: { className?: string; onClick?: () => void }) {
   return (
-    <a
+    <PillButton
       href={LINKS.booking}
+      label="Book Now"
+      variant="alternative"
+      size="sm"
+      external
       target="_blank"
       rel="noopener noreferrer"
       onClick={onClick}
-      className={`group inline-flex items-center gap-2 ${textClass} text-[color:var(--muted-foreground)] hover:text-[color:var(--forest)] ${className}`}
-    >
-      Book Now
-      {showIcon && (
-        <ArrowUpRight
-          className={`transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-px group-hover:translate-x-px h-3 w-3`}
-          strokeWidth={1.5}
-          aria-hidden
-        />
-      )}
-    </a>
+      className={className}
+    />
   );
 }
 
@@ -195,7 +176,7 @@ export function SiteHeader() {
           <div className="col-start-3 flex items-center justify-end gap-6">
             <div className="hidden items-center gap-6 md:flex">
               <span className="h-3 w-px bg-[color:var(--rule-color)]" aria-hidden />
-              <BookNowLink />
+              <BookNowButton />
             </div>
             <button
               type="button"
@@ -249,7 +230,7 @@ export function SiteHeader() {
           <div className="mt-auto pt-8">
             <div className="hairline" />
             <div className="mt-6 flex items-center justify-between">
-              <BookNowLink onClick={() => setOpen(false)} size="lg" />
+              <BookNowButton onClick={() => setOpen(false)} />
               <InstagramLink onClick={() => setOpen(false)} />
             </div>
           </div>

@@ -70,6 +70,7 @@ export default function ContactPage() {
               href={LINKS.booking}
               label="Book Online"
               size="md"
+              variant="primary"
               fullWidth
               external
               target="_blank"

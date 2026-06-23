@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowIcon } from "@/components/PillButton";
 
 export const metadata: Metadata = {
   title: "Services & Pricing",
@@ -239,9 +239,9 @@ export default function ServicesPage() {
                     {s.body}
                   </p>
                 </div>
-                <span className="inline-flex shrink-0 items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--forest)]">
+                <span className="inline-flex shrink-0 items-center gap-2 text-[11px] font-medium uppercase tracking-[0.14em] text-[color:var(--forest)]">
                   <span className="hidden md:inline">{s.from}</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:rotate-45" />
+                  <ArrowIcon size="sm" />
                 </span>
               </a>
             </li>

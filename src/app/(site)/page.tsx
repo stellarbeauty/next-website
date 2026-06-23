@@ -320,7 +320,7 @@ export default function HomePage() {
               Considered cuts, colour and care from a small, focused team in Port Coquitlam.
             </p>
             <div className="mt-10">
-              <PillButton href="/services-and-pricing" label="Explore Services" size="md" variant="ghost" />
+              <PillButton href="/services-and-pricing" label="Explore Services" size="md" variant="primary" />
             </div>
             <p className="mt-16 label-quiet">Port Coquitlam, BC · Est. 2018</p>
           </div>
