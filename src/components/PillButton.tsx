@@ -54,27 +54,36 @@ const ICON_SIZES: Record<Size, { box: string; icon: string }> = {
   lg: { box: "h-10 w-10", icon: "h-4 w-4" },
 };
 
+const ALTERNATIVE_SIZES: Record<Size, { text: string; arrow: string; gap: string }> = {
+  sm: { text: "text-[11px] tracking-[0.14em]", arrow: "h-3 w-3", gap: "gap-2" },
+  md: { text: "text-xs tracking-[0.12em]", arrow: "h-3.5 w-3.5", gap: "gap-2" },
+  lg: { text: "text-sm tracking-[0.1em]", arrow: "h-4 w-4", gap: "gap-2.5" },
+};
+
+const PRIMARY_BORDER_CLASSES = "border border-[color:var(--rule-color-hover)]";
+
+const FROSTED_GLASS_CLASSES = "bg-[color:var(--khaki-soft)]/25 backdrop-blur-sm";
+const DARK_FROSTED_GLASS_CLASSES = "bg-[color:var(--muted-foreground)]/75 backdrop-blur-sm";
+
 const VARIANT_CLASSES: Record<Variant, string> = {
-  primary:
-    "border border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)]/25 text-[color:var(--forest)] backdrop-blur-sm",
-  secondary:
-    "border border-transparent bg-[color:var(--forest)] text-[color:var(--khaki-soft)]",
-  alternative:
-    "border border-transparent bg-transparent text-[color:var(--muted-foreground)]",
+  primary: `${PRIMARY_BORDER_CLASSES} ${FROSTED_GLASS_CLASSES} text-[color:var(--forest)]`,
+  secondary: `border border-transparent ${DARK_FROSTED_GLASS_CLASSES} text-[color:var(--khaki-soft)]`,
+  alternative: "border border-transparent bg-transparent text-[color:var(--muted-foreground)]",
 };
 
 const ICON_CHIP_CLASSES: Record<Variant, string> = {
-  primary: "border border-transparent bg-[color:var(--forest)] text-[color:var(--khaki-soft)]",
-  secondary: "border border-transparent bg-[color:var(--khaki-soft)] text-[color:var(--forest)]",
+  primary: "border border-transparent bg-[color:var(--muted-foreground)] text-[color:var(--khaki-soft)]",
+  secondary: "border border-transparent bg-[color:var(--khaki-soft)] text-[color:var(--muted-foreground)]",
   alternative: "bg-transparent text-[color:var(--muted-foreground)]",
 };
 
 const ICON_ONLY_CLASSES: Record<IconVariant, string> = {
-  transparent:
-    "border border-[color:var(--rule-color)] bg-transparent text-[color:var(--forest)]",
-  filled:
-    "border border-transparent bg-[color:var(--forest)] text-[color:var(--khaki-soft)]",
+  transparent: `${PRIMARY_BORDER_CLASSES} ${FROSTED_GLASS_CLASSES} text-[color:var(--forest)]`,
+  filled: `border border-transparent ${DARK_FROSTED_GLASS_CLASSES} text-[color:var(--khaki-soft)]`,
 };
+
+const ARROW_HOVER_ROTATE =
+  "transition-transform duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none motion-reduce:group-hover:rotate-0 group-hover:rotate-45";
 
 export function ArrowIcon({ className, size = "md" }: { className?: string; size?: Size }) {
   const iconSize = TEXT_SIZES[size].iconSize;
@@ -83,13 +92,14 @@ export function ArrowIcon({ className, size = "md" }: { className?: string; size
 
 function ButtonArrow({ size, variant }: { size: Size; variant: Variant }) {
   const s = TEXT_SIZES[size];
-  const isAlternative = variant === "alternative";
 
-  if (isAlternative) {
+  if (variant === "alternative") {
+    const alt = ALTERNATIVE_SIZES[size];
     return (
       <ArrowRight
         className={cn(
-          "h-3 w-3 shrink-0 text-[color:var(--muted-foreground)] transition-transform duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 group-hover:translate-x-0.5",
+          alt.arrow,
+          "shrink-0 text-[color:var(--muted-foreground)] transition-transform duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 group-hover:translate-x-0.5",
           ICON_CHIP_CLASSES[variant],
         )}
         strokeWidth={1.5}
@@ -102,7 +112,7 @@ function ButtonArrow({ size, variant }: { size: Size; variant: Variant }) {
     <span
       className={cn("flex shrink-0 items-center justify-center rounded-full", s.icon, ICON_CHIP_CLASSES[variant])}
     >
-      <ArrowUpRight className={s.iconSize} strokeWidth={1.5} aria-hidden />
+      <ArrowUpRight className={cn(s.iconSize, ARROW_HOVER_ROTATE)} strokeWidth={1.5} aria-hidden />
     </span>
   );
 }
@@ -114,7 +124,7 @@ function renderInner(props: PillButtonProps) {
     const s = ICON_SIZES[size];
     return (
       <span className={cn("flex items-center justify-center rounded-full", s.box)}>
-        <ArrowUpRight className={s.icon} strokeWidth={1.5} />
+        <ArrowUpRight className={cn(s.icon, ARROW_HOVER_ROTATE)} strokeWidth={1.5} />
       </span>
     );
   }
@@ -134,15 +144,23 @@ export function PillButton(props: PillButtonProps) {
   const isIconOnly = "iconOnly" in props && props.iconOnly;
   const isAlternative = variant === "alternative";
   const iconVariant = isIconOnly ? (props.iconVariant ?? "transparent") : undefined;
+  const alternativeSize = ALTERNATIVE_SIZES[size];
 
   const base = cn(
-    isAlternative && "group",
-    "inline-flex items-center nav-link-text focus-ring",
+    "group",
+    "inline-flex items-center focus-ring",
+    !isAlternative && "nav-link-text",
     !isAlternative && !isIconOnly && "rounded-full",
     isIconOnly
       ? cn(ICON_SIZES[size].box, ICON_ONLY_CLASSES[iconVariant!], "justify-center rounded-full p-0")
       : isAlternative
-        ? cn("gap-2 py-2", fullWidth ? "w-full justify-between" : "", VARIANT_CLASSES[variant])
+        ? cn(
+            "rounded-none py-2 font-medium uppercase",
+            alternativeSize.text,
+            alternativeSize.gap,
+            fullWidth ? "w-full justify-between" : "",
+            VARIANT_CLASSES[variant],
+          )
         : cn(
             TEXT_SIZES[size].pad,
             TEXT_SIZES[size].gap,

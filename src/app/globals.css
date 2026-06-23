@@ -65,6 +65,7 @@
   --ease-flow: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-flow: 500ms;
   --rule-color: color-mix(in oklab, var(--forest) 10%, transparent);
+  --rule-color-hover: color-mix(in oklab, var(--muted-foreground) 40%, transparent);
   --site-header-height: 4rem;
   --scroll-offset: calc(var(--site-header-height) + 0.75rem);
   --background: #ffffff;
