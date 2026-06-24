@@ -108,8 +108,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-t border-[color:var(--rule-color)] bg-background py-16 md:py-20 lg:py-24">
-        <div className="container-page">
+      <section className="border-t border-[color:var(--rule-color)] bg-background">
+        <div className="container-page pt-16 md:pt-20 lg:pt-24">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
               Meet the Team
@@ -158,30 +158,31 @@ export default function AboutPage() {
             </li>
           ))}
           </ul>
-        </div>
-      </section>
 
-      <section className="border-t border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)] py-16 md:py-20 lg:py-24">
-        <div className="container-page">
-          <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">Values</p>
-          <div className="mt-10 hairline" />
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3">
-            {[
-              { n: "01", t: "Craft", b: "Continual training and a relentless attention to the small things." },
-              { n: "02", t: "Care", b: "Clean formulas, calm rooms, no rushed appointments." },
-              { n: "03", t: "Clarity", b: "Honest pricing, honest advice, honest results." },
-            ].map((v, i) => (
-              <div
-                key={v.n}
-                className={`flex flex-col gap-3 py-5 md:py-7 ${i > 0 ? "border-t border-[color:var(--forest)]/10 md:border-t-0 md:border-l md:pl-10" : "md:pr-10"}`}
-              >
-                <p className="font-display text-3xl font-light tracking-[-0.01em] text-[color:var(--forest)]">{v.n}</p>
-                <h3 className="mt-4 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
-                  {v.t}
-                </h3>
-                <p className="text-sm leading-relaxed text-[color:var(--muted-foreground)]">{v.b}</p>
-              </div>
-            ))}
+          <div className="mt-16 mb-16 md:mt-20 md:mb-20 lg:mt-24 lg:mb-24">
+            <div className="flex items-center gap-4">
+              <span className="h-px flex-1 bg-[color:var(--rule-color)]" aria-hidden />
+              <p className="label-quiet shrink-0 text-[color:var(--forest)]">Values</p>
+              <span className="h-px flex-1 bg-[color:var(--rule-color)]" aria-hidden />
+            </div>
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 md:mt-20 lg:mt-24">
+              {[
+                { n: "01", t: "Craft", b: "Continual training and a relentless attention to the small things." },
+                { n: "02", t: "Care", b: "Clean formulas, calm rooms, no rushed appointments." },
+                { n: "03", t: "Clarity", b: "Honest pricing, honest advice, honest results." },
+              ].map((v, i) => (
+                <div
+                  key={v.n}
+                  className={`flex flex-col gap-3 py-5 md:py-7 ${i > 0 ? "border-t border-[color:var(--forest)]/10 md:border-t-0 md:border-l md:pl-10" : "md:pr-10"}`}
+                >
+                  <p className="font-display text-3xl font-light tracking-[-0.01em] text-[color:var(--forest)]">{v.n}</p>
+                  <h3 className="mt-4 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
+                    {v.t}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-[color:var(--muted-foreground)]">{v.b}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
