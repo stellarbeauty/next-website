@@ -74,15 +74,18 @@ export function RatingBadge({ variant = "pill", className = "" }: RatingBadgePro
       rel="noopener noreferrer"
       aria-label={label}
       className={cn(
-        "inline-flex items-center gap-3 rounded-full px-5 py-2.5 focus-ring",
+        "inline-flex flex-col items-center gap-1 rounded-full px-5 py-2.5 focus-ring",
+        "min-[350px]:flex-row min-[350px]:items-center min-[350px]:gap-3",
         PILL_VARIANT_SURFACE.primary,
         className,
       )}
     >
-      <PartialStars />
+      <span className="flex items-center gap-2">
+        <PartialStars />
+        <span className="text-sm font-medium text-[color:var(--forest)]">{GOOGLE_RATING}</span>
+      </span>
       <span className="text-sm text-[color:var(--forest)]">
-        <span className="font-medium">{GOOGLE_RATING}</span>
-        <span className="mx-2 text-[color:var(--muted-foreground)]">·</span>
+        <span className="mx-2 hidden text-[color:var(--muted-foreground)] min-[350px]:inline">·</span>
         <span>{GOOGLE_REVIEW_COUNT} Google reviews</span>
       </span>
     </a>
