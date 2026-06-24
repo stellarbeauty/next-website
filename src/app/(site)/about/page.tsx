@@ -115,33 +115,37 @@ export default function AboutPage() {
             { name: "Daniel Kovac", role: "Stylist · Barbering", ig: null, seed: "daniel-kovac" },
           ].map((m) => (
             <li key={m.name} className="group">
-              <div className="mb-5">
-                <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-[color:var(--forest)]">
-                  {m.name}
-                </h3>
-                <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]">
-                  {m.role}
-                </p>
-              </div>
               <div className="relative overflow-hidden rounded-2xl bg-[color:var(--khaki-soft)]">
                 <Image
                   src={`https://picsum.photos/seed/${m.seed}/800/1000`}
                   alt={`${m.name}, ${m.role} at Stellar Beauty in Port Coquitlam`}
                   width={800}
                   height={1000}
-                  className="aspect-[4/5] w-full object-cover grayscale transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0"
+                  className="aspect-[4/5] w-full object-cover transition-[filter,transform] duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none motion-reduce:group-hover:blur-0 motion-reduce:group-hover:scale-100 group-hover:scale-[1.02] group-hover:blur-[3px]"
                 />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-[color:var(--khaki-soft)]/25 opacity-0 backdrop-blur-sm transition-opacity duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none group-hover:opacity-100"
+                />
+                <div className="absolute top-4 left-4 z-10">
+                  <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-[color:var(--forest)]">
+                    {m.name}
+                  </h3>
+                  <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]">
+                    {m.role}
+                  </p>
+                </div>
                 {m.ig && (
                   <PillButton
                     href={`https://instagram.com/${m.ig}`}
                     external
                     target="_blank"
                     iconOnly
-                    iconVariant="filled"
-                    size="md"
+                    iconVariant="transparent"
+                    size="lg"
                     ariaLabel={`${m.name} on Instagram`}
-                    icon={<Instagram className="h-4 w-4" strokeWidth={1.5} aria-hidden />}
-                    className="absolute bottom-4 right-4"
+                    icon={<Instagram className="h-6 w-6 text-[color:var(--khaki-soft)]" strokeWidth={1.5} aria-hidden />}
+                    className="absolute bottom-4 left-4 z-10 border-transparent"
                   />
                 )}
               </div>
