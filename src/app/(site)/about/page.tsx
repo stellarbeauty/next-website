@@ -2,8 +2,23 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Instagram } from "lucide-react";
 import { RatingBadge } from "@/components/RatingBadge";
-import { PillButton } from "@/components/PillButton";
+import { PillButton, PILL_VARIANT_SURFACE } from "@/components/PillButton";
+import { cn } from "@/lib/utils";
 import portrait from "@/assets/about-portrait.jpg";
+import teamAmelia from "@/assets/team-amelia-rourke.png";
+import teamPriya from "@/assets/team-priya-shah.png";
+import teamJordan from "@/assets/team-jordan-mei.png";
+import teamDaniel from "@/assets/team-daniel-kovac.png";
+
+const TEAM = [
+  { name: "Amelia Rourke", role: "Founder · Creative Director", ig: "amelia.stellar", image: teamAmelia },
+  { name: "Priya Shah", role: "Senior Colourist", ig: "priya.colour", image: teamPriya },
+  { name: "Jordan Mei", role: "Senior Stylist", ig: "jordan.mei.hair", image: teamJordan },
+  { name: "Daniel Kovac", role: "Stylist · Barbering", ig: null, image: teamDaniel },
+] as const;
+
+const TEAM_LABEL =
+  "rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--forest)]";
 
 export const metadata: Metadata = {
   title: "About",
@@ -107,47 +122,38 @@ export default function AboutPage() {
             Quietly skilled, generously attentive.
           </h2>
           <div className="mt-6 hairline" />
-          <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { name: "Amelia Rourke", role: "Founder · Creative Director", ig: "amelia.stellar", seed: "amelia-rourke" },
-            { name: "Priya Shah", role: "Senior Colourist", ig: "priya.colour", seed: "priya-shah" },
-            { name: "Jordan Mei", role: "Senior Stylist", ig: "jordan.mei.hair", seed: "jordan-mei" },
-            { name: "Daniel Kovac", role: "Stylist · Barbering", ig: null, seed: "daniel-kovac" },
-          ].map((m) => (
+          <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-9">
+          {TEAM.map((m) => (
             <li key={m.name} className="group">
               <div className="relative overflow-hidden rounded-2xl bg-[color:var(--khaki-soft)]">
                 <Image
-                  src={`https://picsum.photos/seed/${m.seed}/800/1000`}
+                  src={m.image}
                   alt={`${m.name}, ${m.role} at Stellar Beauty in Port Coquitlam`}
-                  width={800}
-                  height={1000}
+                  width={m.image.width}
+                  height={m.image.height}
                   className="aspect-[4/5] w-full object-cover transition-[filter,transform] duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none motion-reduce:group-hover:blur-0 motion-reduce:group-hover:scale-100 group-hover:scale-[1.02] group-hover:blur-[3px]"
                 />
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0 bg-[color:var(--khaki-soft)]/25 opacity-0 backdrop-blur-sm transition-opacity duration-300 ease-[var(--ease-flow)] motion-reduce:transition-none group-hover:opacity-100"
                 />
-                <div className="absolute top-4 left-4 z-10">
-                  <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-[color:var(--forest)]">
-                    {m.name}
-                  </h3>
-                  <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]">
-                    {m.role}
-                  </p>
-                </div>
                 {m.ig && (
                   <PillButton
                     href={`https://instagram.com/${m.ig}`}
                     external
                     target="_blank"
                     iconOnly
-                    iconVariant="transparent"
-                    size="lg"
+                    iconVariant="filled"
+                    size="md"
                     ariaLabel={`${m.name} on Instagram`}
-                    icon={<Instagram className="h-6 w-6 text-[color:var(--khaki-soft)]" strokeWidth={1.5} aria-hidden />}
-                    className="absolute bottom-4 left-4 z-10 border-transparent"
+                    icon={<Instagram className="h-5 w-5" strokeWidth={1.5} aria-hidden />}
+                    className="absolute top-4 left-4 z-10"
                   />
                 )}
+                <div className="absolute bottom-4 left-4 z-10 flex flex-col items-start gap-2">
+                  <p className={cn(TEAM_LABEL, PILL_VARIANT_SURFACE.primary)}>{m.name}</p>
+                  <p className={cn(TEAM_LABEL, PILL_VARIANT_SURFACE.primary)}>{m.role}</p>
+                </div>
               </div>
             </li>
           ))}
