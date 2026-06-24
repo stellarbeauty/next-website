@@ -24,6 +24,7 @@ type IconButtonProps = CommonProps & {
   iconOnly: true;
   ariaLabel: string;
   iconVariant?: IconVariant;
+  icon?: ReactNode;
 };
 
 type LinkProps = (TextButtonProps | IconButtonProps) & {
@@ -78,6 +79,8 @@ const VARIANT_CLASSES: Record<Variant, string> = {
   secondary: `${TRANSPARENT_BORDER_CLASSES} ${DARK_FROSTED_GLASS_CLASSES} text-[color:var(--khaki-soft)]`,
   alternative: `${TRANSPARENT_BORDER_CLASSES} bg-transparent text-[color:var(--muted-foreground)]`,
 };
+
+export const PILL_VARIANT_SURFACE = VARIANT_CLASSES;
 
 const ICON_CHIP_CLASSES: Record<Variant, string> = {
   primary: `${TRANSPARENT_BORDER_CLASSES} bg-[color:var(--muted-foreground)] text-[color:var(--khaki-soft)]`,
@@ -144,7 +147,9 @@ function renderInner(props: PillButtonProps) {
   if ("iconOnly" in props && props.iconOnly) {
     return (
       <span className={cn("flex items-center justify-center rounded-full", styles.iconOnly.box)}>
-        <ArrowUpRight className={cn(styles.iconOnly.iconSize, ARROW_HOVER_ROTATE)} strokeWidth={1.5} aria-hidden />
+        {props.icon ?? (
+          <ArrowUpRight className={cn(styles.iconOnly.iconSize, ARROW_HOVER_ROTATE)} strokeWidth={1.5} aria-hidden />
+        )}
       </span>
     );
   }

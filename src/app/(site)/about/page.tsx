@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Instagram } from "lucide-react";
 import { RatingBadge } from "@/components/RatingBadge";
+import { PillButton } from "@/components/PillButton";
 import portrait from "@/assets/about-portrait.jpg";
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ export default function AboutPage() {
         <div className="mt-8 hairline" />
       </section>
 
-      <section className="pb-10 pt-10 md:pb-14 md:pt-14">
+      <section className="py-16 md:py-20 lg:py-24">
         <div className="container-page grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
             <Image
@@ -62,18 +63,29 @@ export default function AboutPage() {
             </div>
 
             <div className="mt-10 hairline" />
-            <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
+            <dl className="mt-8 space-y-8 md:mt-10 md:space-y-10">
               {[
-                ["Est.", "2018"],
-                ["Location", "Port Coquitlam"],
-                ["Team", "4 stylists"],
-                ["Studio", "700 sq ft, north-facing"],
-              ].map(([k, v]) => (
-                <div key={k} className="flex items-baseline gap-3">
-                  <dt className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-                    {k}
-                  </dt>
-                  <dd className="text-[color:var(--forest)]">{v}</dd>
+                [
+                  ["Est.", "2018"],
+                  ["Location", "Port Coquitlam"],
+                ],
+                [
+                  ["Team", "4 stylists"],
+                  ["Studio", "700 sq ft, north-facing"],
+                ],
+              ].map((row, rowIndex) => (
+                <div key={rowIndex}>
+                  {rowIndex > 0 && <div className="mb-8 hairline md:mb-10" />}
+                  <div className="grid grid-cols-2 items-start gap-x-8 md:gap-x-12">
+                    {row.map(([k, v]) => (
+                      <div key={k} className="min-w-0">
+                        <dt className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+                          {k}
+                        </dt>
+                        <dd className="mt-2 text-sm text-[color:var(--forest)] md:text-base">{v}</dd>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </dl>
@@ -81,8 +93,66 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-[color:var(--khaki-soft)]">
-        <div className="container-page py-10 md:py-12">
+      <section className="border-t border-[color:var(--rule-color)] bg-background py-16 md:py-20 lg:py-24">
+        <div className="container-page">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
+            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
+              Meet the Team
+            </p>
+            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+              — Four stylists, one studio
+            </p>
+          </div>
+          <h2 className="mt-6 max-w-2xl font-display text-2xl font-medium leading-[1.15] tracking-[-0.015em] text-[color:var(--forest)] md:text-3xl">
+            Quietly skilled, generously attentive.
+          </h2>
+          <div className="mt-6 hairline" />
+          <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { name: "Amelia Rourke", role: "Founder · Creative Director", ig: "amelia.stellar", seed: "amelia-rourke" },
+            { name: "Priya Shah", role: "Senior Colourist", ig: "priya.colour", seed: "priya-shah" },
+            { name: "Jordan Mei", role: "Senior Stylist", ig: "jordan.mei.hair", seed: "jordan-mei" },
+            { name: "Daniel Kovac", role: "Stylist · Barbering", ig: null, seed: "daniel-kovac" },
+          ].map((m) => (
+            <li key={m.name} className="group">
+              <div className="mb-5">
+                <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-[color:var(--forest)]">
+                  {m.name}
+                </h3>
+                <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]">
+                  {m.role}
+                </p>
+              </div>
+              <div className="relative overflow-hidden rounded-2xl bg-[color:var(--khaki-soft)]">
+                <Image
+                  src={`https://picsum.photos/seed/${m.seed}/800/1000`}
+                  alt={`${m.name}, ${m.role} at Stellar Beauty in Port Coquitlam`}
+                  width={800}
+                  height={1000}
+                  className="aspect-[4/5] w-full object-cover grayscale transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0"
+                />
+                {m.ig && (
+                  <PillButton
+                    href={`https://instagram.com/${m.ig}`}
+                    external
+                    target="_blank"
+                    iconOnly
+                    iconVariant="filled"
+                    size="md"
+                    ariaLabel={`${m.name} on Instagram`}
+                    icon={<Instagram className="h-4 w-4" strokeWidth={1.5} aria-hidden />}
+                    className="absolute bottom-4 right-4"
+                  />
+                )}
+              </div>
+            </li>
+          ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="border-t border-[color:var(--rule-color)] bg-[color:var(--khaki-soft)] py-16 md:py-20 lg:py-24">
+        <div className="container-page">
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">Values</p>
           <div className="mt-10 hairline" />
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3">
@@ -106,63 +176,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="container-page py-12 md:py-16">
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
-          <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
-            Meet the Team
-          </p>
-          <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-            — Four stylists, one studio
-          </p>
-        </div>
-        <h2 className="mt-6 max-w-2xl font-display text-2xl font-medium leading-[1.15] tracking-[-0.015em] text-[color:var(--forest)] md:text-3xl">
-          Quietly skilled, generously attentive.
-        </h2>
-        <div className="mt-6 hairline" />
-        <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { name: "Amelia Rourke", role: "Founder · Creative Director", ig: "amelia.stellar", seed: "amelia-rourke" },
-            { name: "Priya Shah", role: "Senior Colourist", ig: "priya.colour", seed: "priya-shah" },
-            { name: "Jordan Mei", role: "Senior Stylist", ig: "jordan.mei.hair", seed: "jordan-mei" },
-            { name: "Daniel Kovac", role: "Stylist · Barbering", ig: null, seed: "daniel-kovac" },
-          ].map((m) => (
-            <li key={m.name} className="group">
-              <div className="relative overflow-hidden rounded-2xl bg-[color:var(--khaki-soft)]">
-                <Image
-                  src={`https://picsum.photos/seed/${m.seed}/800/1000`}
-                  alt={`${m.name}, ${m.role} at Stellar Beauty in Port Coquitlam`}
-                  width={800}
-                  height={1000}
-                  className="aspect-[4/5] w-full object-cover grayscale transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0"
-                />
-                {m.ig && (
-                  <a
-                    href={`https://instagram.com/${m.ig}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${m.name} on Instagram`}
-                    className="pointer-events-none absolute inset-x-4 bottom-4 flex translate-y-3 items-center justify-between rounded-full border border-white/30 bg-[color:var(--forest)]/85 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--khaki-soft)] opacity-0 backdrop-blur transition-all duration-500 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100"
-                  >
-                    <span className="truncate">@{m.ig}</span>
-                    <Instagram className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                  </a>
-                )}
-              </div>
-              <div className="mt-5">
-                <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-[color:var(--forest)]">
-                  {m.name}
-                </h3>
-                <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]">
-                  {m.role}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="border-t border-[color:var(--rule-color)] bg-white">
-        <div className="container-page py-12 md:py-16">
+      <section className="border-t border-[color:var(--rule-color)] bg-background py-16 md:py-20 lg:py-24">
+        <div className="container-page">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">Gallery</p>
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">

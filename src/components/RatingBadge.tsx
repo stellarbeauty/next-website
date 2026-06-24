@@ -1,5 +1,7 @@
 import { Star } from "lucide-react";
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT, LINKS } from "@/lib/links";
+import { PILL_VARIANT_SURFACE } from "@/components/PillButton";
+import { cn } from "@/lib/utils";
 
 type RatingBadgeProps = {
   variant?: "pill" | "inline";
@@ -71,7 +73,11 @@ export function RatingBadge({ variant = "pill", className = "" }: RatingBadgePro
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className={`inline-flex items-center gap-4 rounded-full border border-[color:var(--rule-color)] bg-white/60 px-5 py-2.5 backdrop-blur transition-colors hover:border-[color:var(--forest)]/30 ${className}`}
+      className={cn(
+        "inline-flex items-center gap-3 rounded-full px-5 py-2.5 focus-ring",
+        PILL_VARIANT_SURFACE.primary,
+        className,
+      )}
     >
       <PartialStars />
       <span className="text-sm text-[color:var(--forest)]">
