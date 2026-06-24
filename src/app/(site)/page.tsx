@@ -20,7 +20,7 @@ import {
 import { PillButton } from "@/components/PillButton";
 import { PhilosophyStats } from "@/components/PhilosophyStats";
 import { RatingBadge } from "@/components/RatingBadge";
-import heroImg from "@/assets/hero-salon.jpg";
+import heroImg from "@/assets/hero-portrait.jpg";
 
 export const metadata: Metadata = {
   title: "Stellar Beauty — Modern Hair & Beauty Salon",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Stellar Beauty — Modern Hair & Beauty Salon",
     description:
       "Precision cuts, balayage, foils, perms, keratin, makeup, threading and waxing in Port Coquitlam, BC.",
-    images: [{ url: "/images/hero-salon.jpg", width: 960, height: 1280 }],
+    images: [{ url: "/images/hero-portrait.jpg", width: 682, height: 1024 }],
   },
 };
 
@@ -309,7 +309,7 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
-      <section className="relative w-full overflow-hidden bg-[color:var(--khaki-soft)]">
+      <section className="relative w-full overflow-hidden bg-[linear-gradient(to_bottom_right,var(--khaki-soft)_0%,var(--khaki-soft)_60%,color-mix(in_oklab,var(--khaki-soft)_30%,white)_100%)]">
         <div className="container-page grid min-h-[82vh] grid-cols-1 items-start gap-12 pt-[calc(var(--site-header-height)+2.5rem)] pb-12 md:pt-[calc(var(--site-header-height)+3.5rem)] md:pb-16 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7 lg:pt-4">
             <SectionMarker n="01 / 05" label="Stellar Beauty" />
@@ -326,10 +326,10 @@ export default function HomePage() {
           </div>
 
           <div className="lg:col-span-5 lg:mt-20">
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-[0_24px_48px_-24px_rgba(22,44,36,0.25)]">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-[0_12px_32px_-16px_rgba(22,44,36,0.12)]">
               <Image
                 src={heroImg}
-                alt="Stellar Beauty salon interior in Port Coquitlam — natural light, sage green accents and warm khaki millwork"
+                alt="Close-up portrait with warm golden light across the face — beauty and artistry at Stellar Beauty"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 40vw"
