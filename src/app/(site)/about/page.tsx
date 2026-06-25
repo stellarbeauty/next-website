@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="container-page pt-[calc(var(--site-header-height)+3rem)] pb-8 md:pt-[calc(var(--site-header-height)+4rem)] md:pb-10">
+      <section className="container-page pt-[calc(var(--site-header-height)+3rem)] md:pt-[calc(var(--site-header-height)+4rem)]">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">About</p>
           <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
@@ -45,10 +45,10 @@ export default function AboutPage() {
           We believe modern beauty is quiet, considered and deeply personal.
         </h1>
         <RatingBadge className="mt-10" />
-        <div className="mt-8 hairline" />
+        <div className="mt-16 md:mt-20 lg:mt-24 hairline" />
       </section>
 
-      <section className="py-16 md:py-20 lg:py-24">
+      <section className="pt-16 md:pt-20 lg:pt-24 pb-16 md:pb-20 lg:pb-24">
         <div className="container-page grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
             <Image
@@ -187,8 +187,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-t border-[color:var(--rule-color)] bg-background py-16 md:py-20 lg:py-24">
-        <div className="container-page">
+      <section className="border-t border-[color:var(--rule-color)] bg-background">
+        <div className="container-page pt-16 pb-16 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">Gallery</p>
             <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
