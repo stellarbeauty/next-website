@@ -269,7 +269,7 @@ export default function ServicesPage() {
                 className="anchor-target grid gap-8 md:grid-cols-12 md:gap-12"
               >
                 <div className="md:col-span-3">
-                  <h3 className="text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--forest)]">
+                  <h3 className="font-display text-lg font-medium leading-tight tracking-[-0.01em] text-[color:var(--forest)] md:text-xl">
                     {g.group}
                   </h3>
                   {g.groupNote && (
