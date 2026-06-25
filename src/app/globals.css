@@ -59,7 +59,7 @@
   --radius: 1rem;
   --khaki: #dfd1b6;
   --khaki-soft: #f5e7d0;
-  --offwhite: #e8e8e8;
+  --offwhite: #f7f6f3;
   --ink: #171717;
   --forest: #162c24;
   --ease-flow: cubic-bezier(0.22, 1, 0.36, 1);
@@ -68,7 +68,7 @@
   --rule-color-hover: color-mix(in oklab, var(--muted-foreground) 45%, var(--khaki-soft));
   --site-header-height: 4rem;
   --scroll-offset: calc(var(--site-header-height) + 0.75rem);
-  --background: #ffffff;
+  --background: var(--offwhite);
   --foreground: #171717;
   --card: #ffffff;
   --card-foreground: #171717;
